@@ -2,6 +2,9 @@ package com.example.covtest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -48,6 +51,22 @@ public class TestActivity extends AppCompatActivity {
         if( i<data.length -1){
             i++;
             loadQuestion();
+        }else{
+            new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Show Result").setIcon(R.drawable.start_icon)
+                .setMessage("Are you sure you want to show result of your test ?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getBaseContext(), ResultActivity.class);
+                        startActivity(intent);
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
         }
     }
 
