@@ -26,43 +26,71 @@
         android:layout_height="match_parent"
         android:gravity="start"
         android:orientation="vertical"
-        android:padding="50dp">
+        android:padding="40dp">
 
-        <TextView
-            android:id="@+id/textView3"
+        <SeekBar
+            android:id="@+id/seekBar"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Terms of service"
-            android:textAlignment="center"
+            android:max="10"
+            android:progress="0"
+            android:thumb="@drawable/ic_baseline_adjust_24" />
+
+        <ImageView
+            android:id="@+id/Q_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/tchow" />
+
+        <TextView
+            android:id="@+id/txt_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Question 1 : ------------------- ?"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txt_question_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="50dp"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="TextView" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+
             <Button
-                android:id="@+id/btntestSkip"
-                style="@style/cornerRadios"
+                android:id="@+id/btn_preview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="1dp"
-                android:text="Accept and Go"
+                android:onClick="preview"
                 android:textColor="#FFF"
-                android:textSize="14dp"
                 app:backgroundTint="@color/colorAccent"
-                app:icon="@drawable/ic_play"
-                app:iconGravity="textStart"
-                app:iconTint="#FFF" />
+                app:icon="@android:drawable/ic_media_rew" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
+                android:onClick="next"
+                android:textColor="#FFF"
+                app:backgroundTint="@color/colorAccent"
+                app:icon="@android:drawable/ic_media_ff" />
 
         </LinearLayout>
 
