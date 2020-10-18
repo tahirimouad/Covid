@@ -30,16 +30,17 @@
 
         <ImageView
             android:id="@+id/startIcon"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="102dp"
+            android:layout_height="121dp"
             android:layout_marginBottom="30dp"
-            android:src="@drawable/start_icon" />
+            android:src="@drawable/info_icon" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test Result "
+            android:text="@string/text_conseil"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -47,30 +48,11 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="50dp"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indu" />
+            android:text="@string/text_msg"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="24dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btntestSkip"
-                style="@style/cornerRadios"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="1dp"
-                android:text="Try again"
-                android:textColor="#FFF"
-                android:textSize="14dp"
-                app:backgroundTint="@color/colorAccent"
-                app:icon="@drawable/ic_play"
-                app:iconGravity="textStart"
-                app:iconTint="#FFF" />
-
-        </LinearLayout>
 
 
     </LinearLayout>
