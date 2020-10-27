@@ -13,18 +13,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.covtest.entities.Question;
+import com.example.covtest.entities.TestReport;
 import com.example.covtest.network.ApiClient;
 import com.example.covtest.network.ApiService;
 import com.example.covtest.network.TestResponse;
 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -45,12 +49,21 @@ public class TestActivity extends AppCompatActivity {
                         {"@drawable/tchow", "Question 1 : ", "Avez-vous une fatigue inhabituelle ces derniers jours ?"},
                         {"@drawable/chaleur", "Question 2 : ", " Avez-vous une toux ou votre toux habituelle s’est-elle modifiée ces derniers jours ?"},
                         {"@drawable/covid", "Question 3 : ", "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?"},
-                        {"@drawable/toux", "Question 4 : ", " Ces derniers jours, avez-vous une toux ou votre toux habituelle s’est-elle modifiée ? "},
-                        {"@drawable/fatigue", "Question 5 : ", "  Ces derniers jours, avez-vous une fatigue inhabituelle ? "},
-                        {"@drawable/gorge", "Question 3 : ", "  Ces derniers jours, avez-vous eu un mal de gorge et/ou des douleurs musculaires et/ou des courbatures inhabituelles et/ou des maux de tête inhabituels ? "},
-                        {"@drawable/diarrhea", "Question 3 : ", " Ces dernières 24 heures, avez-vous de la diarrhée ?\nAvec au moins 3 selles molles."},
-                        {"@drawable/breathing", "Question 3 : ", " Ces dernières 24 heures, avez-vous noté un manque de souffle inhabituel lorsque vous parlez ou faites un petit effort ?"},
+                        {"@drawable/tchow", "Question 4 : ", " Ces derniers jours, avez-vous une toux ou votre toux habituelle s’est-elle modifiée ? "},
+                        {"@drawable/tchow", "Question 5 : ", "  Ces derniers jours, avez-vous une fatigue inhabituelle ? "},
+                        {"@drawable/tchow", "Question 3 : ", "  Ces derniers jours, avez-vous eu un mal de gorge et/ou des douleurs musculaires et/ou des courbatures inhabituelles et/ou des maux de tête inhabituels ? "},
+                        {"@drawable/tchow", "Question 3 : ", " Ces dernières 24 heures, avez-vous de la diarrhée ?\nAvec au moins 3 selles molles."},
+                        {"@drawable/tchow", "Question 3 : ", " Ces dernières 24 heures, avez-vous noté un manque de souffle inhabituel lorsque vous parlez ou faites un petit effort ?"},
                 };
+
+        /*{"@drawable/tchow", "Question 1 : ", "Avez-vous une fatigue inhabituelle ces derniers jours ?"},
+        {"@drawable/chaleur", "Question 2 : ", " Avez-vous une toux ou votre toux habituelle s’est-elle modifiée ces derniers jours ?"},
+        {"@drawable/covid", "Question 3 : ", "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?"},
+        {"@drawable/toux", "Question 4 : ", " Ces derniers jours, avez-vous une toux ou votre toux habituelle s’est-elle modifiée ? "},
+        {"@drawable/fatigue", "Question 5 : ", "  Ces derniers jours, avez-vous une fatigue inhabituelle ? "},
+        {"@drawable/gorge", "Question 3 : ", "  Ces derniers jours, avez-vous eu un mal de gorge et/ou des douleurs musculaires et/ou des courbatures inhabituelles et/ou des maux de tête inhabituels ? "},
+        {"@drawable/diarrhea", "Question 3 : ", " Ces dernières 24 heures, avez-vous de la diarrhée ?\nAvec au moins 3 selles molles."},
+        {"@drawable/breathing", "Question 3 : ", " Ces dernières 24 heures, avez-vous noté un manque de souffle inhabituel lorsque vous parlez ou faites un petit effort ?"},*/
         data = items;
 
 
@@ -84,7 +97,33 @@ public class TestActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
+                            final DecimalFormat df = new DecimalFormat("##.###");
+
                             ApiService apiService = ApiClient.getInstance().create(ApiService.class);
+                            TestReport testReport = new TestReport(1,0,0,1,0,0,1,1,0,1);
+                            Call<TestResponse> testing = apiService.checkResult(testReport);
+                            testing.enqueue(new Callback<TestResponse>() {
+                                @Override
+                                public void onResponse(Call<TestResponse> call, Response<TestResponse> response) {
+                                    if(response.isSuccessful()){
+                                        Toast.makeText(TestActivity.this,"Result : "+response.body().getResult(),Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(TestActivity.this, ResultActivity.class);
+                                        intent.putExtra("result",""+df.format(response.body().getResult()));
+                                        startActivity(intent);
+                                    }
+                                    else{
+                                        Toast.makeText(TestActivity.this,"Req not success",Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<TestResponse> call, Throwable t) {
+                                    Toast.makeText(TestActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+
+                            /*ApiService apiService = ApiClient.getInstance().create(ApiService.class);
                             apiService.setParam(0, 1, 0, 1, 1,
                                     0, 1, 0, 0, 1,
                                     new Callback<TestResponse>() {
@@ -92,7 +131,7 @@ public class TestActivity extends AppCompatActivity {
                                         public void onResponse(@NonNull Call<TestResponse> call,@NonNull retrofit2.Response<TestResponse> response) {
                                             String prediction = "" + response.body().getResult();
 
-                                            Intent intent = new Intent(getBaseContext(), ResultActivity.class);
+                                            Intent intent = new Intent(TestActivity.this, ResultActivity.class);
                                             intent.putExtra("result",prediction);
                                             startActivity(intent);
                                         }
@@ -101,12 +140,38 @@ public class TestActivity extends AppCompatActivity {
                                         public void onFailure(@NonNull Call<TestResponse> call, @NonNull Throwable t) {
 
                                         }
-                                    });
+                                    });*/
 
                         }
 
                     })
-                    .setNegativeButton("No", null)
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ApiService apiService = ApiClient.getInstance().create(ApiService.class);
+                            TestReport testReport = new TestReport(1,0,0,1,0,0,1,1,0,1);
+                            Call<TestResponse> testing = apiService.checkResult(testReport);
+                            testing.enqueue(new Callback<TestResponse>() {
+                                @Override
+                                public void onResponse(Call<TestResponse> call, Response<TestResponse> response) {
+                                    if(response.isSuccessful()){
+                                        Toast.makeText(TestActivity.this,"Result : "+response.body().getResult(),Toast.LENGTH_LONG).show();
+                                    }
+                                    else{
+                                        Toast.makeText(TestActivity.this,"Req not success",Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<TestResponse> call, Throwable t) {
+                                    Toast.makeText(TestActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+
+
+                        }
+                    })
                     .show();
         }
     }
