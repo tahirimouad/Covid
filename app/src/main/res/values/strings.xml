@@ -3,4 +3,6 @@
     <string name="forward_image_button">forward image button</string>
     <string name="back_image_button">back image button</string>
     <string name="example_question">Have you been unusually tired these few days? Y/N</string>
+    <string name="text_msg">Appelez le SAMU en composant le 15 (ou contactez le 114 par SMS si vous êtes sourd ou malentendant).</string>
+    <string name="text_conseil">Conseil relatif à votre situation</string>
 </resources>
