@@ -24,55 +24,69 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical"
-        android:padding="50dp">
+        android:gravity="center"
+        android:padding="50dp"
+        >
 
-        <ImageView
-            android:id="@+id/startIcon"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginBottom="30dp"
-            android:src="@drawable/start_icon" />
-
-        <TextView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test Result "
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            app:shapeAppearance="@style/ShapeAppearance.MyApp.MediumComponent.Rounded"
+            >
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="50dp"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indu" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/startIcon"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="30dp"
+                    android:src="@drawable/start_icon" />
 
-            <Button
-                android:id="@+id/btntestSkip"
-                style="@style/cornerRadios"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="1dp"
-                android:text="Try again"
-                android:textColor="#FFF"
-                android:textSize="14dp"
-                app:backgroundTint="@color/colorAccent"
-                app:icon="@drawable/ic_play"
-                app:iconGravity="textStart"
-                app:iconTint="#FFF" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test Result "
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="50dp"
+                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indu" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
 
+                    <Button
+                        android:id="@+id/btntestSkip"
+                        style="@style/cornerRadios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="1dp"
+                        android:text="Try again"
+                        android:textColor="#FFF"
+                        android:textSize="14dp"
+                        app:backgroundTint="@color/colorAccent"
+                        app:icon="@drawable/ic_play"
+                        app:iconGravity="textStart"
+                        app:iconTint="#FFF" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
-
 </LinearLayout>

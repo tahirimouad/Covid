@@ -12,4 +12,12 @@
         <item name="backgroundTint">#CCEAFF</item>
         <item name="android:background">@drawable/courned_layout</item>
     </style>
+
+    <style name="ShapeAppearance.MyApp.MediumComponent.Rounded" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeBottomRight">20dp</item>
+
+    </style>
 </resources>
