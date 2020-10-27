@@ -1,5 +1,6 @@
 package com.example.covtest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -12,27 +13,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.covtest.entities.Question;
+import com.example.covtest.network.ApiClient;
+import com.example.covtest.network.ApiService;
+import com.example.covtest.network.TestResponse;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class TestActivity extends AppCompatActivity {
 
-    final String url = "http://192.168.1.13:5000/api/";
-    private RequestQueue queue;
     private List<Question> questionList;
     public SeekBar seekBar;
     public TextView txt_question;
@@ -47,13 +42,12 @@ public class TestActivity extends AppCompatActivity {
 
         String[][] items =
                 {
-                        {"@drawable/tchow", "Question 1 : ", "Avez-vous une fatigue inhabituelle ces derniers jours ?,"},
+                        {"@drawable/tchow", "Question 1 : ", "Avez-vous une fatigue inhabituelle ces derniers jours ?"},
                         {"@drawable/chaleur", "Question 2 : ", " Avez-vous une toux ou votre toux habituelle s’est-elle modifiée ces derniers jours ?"},
                         {"@drawable/covid", "Question 3 : ", "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?"},
                 };
         data = items;
 
-        queue = Volley.newRequestQueue(this);
 
         questionList = new ArrayList<>();
         questionList = setAllQuestions();
@@ -85,43 +79,24 @@ public class TestActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            JSONObject postparams = null;
-                            // Fill the jsonObject with user inputs
-                            String json = "";
-                            System.out.println(json);
-                            try {
-                                postparams = new JSONObject(json);
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            // Send a post request and fetch the results from the flaskAPI
-                            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postparams, new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    try {
-                                        JSONArray data = response.getJSONArray("data");
-                                        if (data.length() == 0) {
-                                            Toast.makeText(getApplicationContext(), "No result !", Toast.LENGTH_LONG).show();
-                                        } else {
-                                            JSONObject obj = data.getJSONObject(0);
-                                            String prediction = "" + obj.getString("prediction");
+                            ApiService apiService = ApiClient.getInstance().create(ApiService.class);
+                            apiService.setParam(0, 1, 0, 1, 1,
+                                    0, 1, 0, 0, 1,
+                                    new Callback<TestResponse>() {
+                                        @Override
+                                        public void onResponse(@NonNull Call<TestResponse> call,@NonNull retrofit2.Response<TestResponse> response) {
+                                            String prediction = "" + response.body().getResult();
 
                                             Intent intent = new Intent(getBaseContext(), ResultActivity.class);
                                             intent.putExtra("result",prediction);
                                             startActivity(intent);
                                         }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }, new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
 
-                                }
-                            });
-                            queue.add(jsonObjectRequest);
+                                        @Override
+                                        public void onFailure(@NonNull Call<TestResponse> call, @NonNull Throwable t) {
+
+                                        }
+                                    });
 
                         }
 
@@ -133,7 +108,7 @@ public class TestActivity extends AppCompatActivity {
 
     private ArrayList<Question> setAllQuestions(){
         ArrayList<Question> list = new ArrayList<>();
-        list.add(new Question("@drawable/tchow", "Question 1 : ", "Lorem Ipsum is simply dummy text of the printing and typesetting industry."));
+        list.add(new Question("@drawable/tchow", "Question 1 : ", "Avez-vous une fatigue inhabituelle ces derniers jours ?"));
         list.add(new Question("@drawable/chaleur", "Question 2 : ", "Lorem Ipsum is simply dummy text of the printing and typesetting industry."));
         list.add(new Question("@drawable/covid", "Question 3 : ", "Lorem Ipsum is simply dummy text of the printing and typesetting industry."));
         return list;

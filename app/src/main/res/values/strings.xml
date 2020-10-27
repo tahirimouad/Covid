@@ -5,4 +5,9 @@
     <string name="example_question">Have you been unusually tired these few days? Y/N</string>
     <string name="text_msg">Appelez le SAMU en composant le 15 (ou contactez le 114 par SMS si vous êtes sourd ou malentendant).</string>
     <string name="text_conseil">Conseil relatif à votre situation</string>
+
+    <!--Array of Question-->
+    <array name="arrayQuestion">
+        <item></item>
+    </array>
 </resources>
