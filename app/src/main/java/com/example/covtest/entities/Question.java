@@ -4,27 +4,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class Question {
     @SerializedName("id")
-    private String icon;
+    private String id;
     @SerializedName("question")
-    private String nQuestion;
+    private String question;
 
-    private String details;
+    private String icon;
 
-    public Question(String icon, String nQuestion, String details) {
+    public Question(String id, String nQuestion, String icon) {
+        this.id = icon;
+        this.question = nQuestion;
         this.icon = icon;
-        this.nQuestion = nQuestion;
-        this.details = details;
     }
 
     public String getIcon() {
-        return icon;
+        return id;
     }
 
     public String getnQuestion() {
-        return nQuestion;
+        return question;
     }
 
     public String getDetails() {
-        return details;
+        return icon;
     }
 }

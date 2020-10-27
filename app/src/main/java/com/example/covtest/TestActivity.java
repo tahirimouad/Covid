@@ -45,6 +45,11 @@ public class TestActivity extends AppCompatActivity {
                         {"@drawable/tchow", "Question 1 : ", "Avez-vous une fatigue inhabituelle ces derniers jours ?"},
                         {"@drawable/chaleur", "Question 2 : ", " Avez-vous une toux ou votre toux habituelle s’est-elle modifiée ces derniers jours ?"},
                         {"@drawable/covid", "Question 3 : ", "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?"},
+                        {"@drawable/toux", "Question 4 : ", " Ces derniers jours, avez-vous une toux ou votre toux habituelle s’est-elle modifiée ? "},
+                        {"@drawable/fatigue", "Question 5 : ", "  Ces derniers jours, avez-vous une fatigue inhabituelle ? "},
+                        {"@drawable/gorge", "Question 3 : ", "  Ces derniers jours, avez-vous eu un mal de gorge et/ou des douleurs musculaires et/ou des courbatures inhabituelles et/ou des maux de tête inhabituels ? "},
+                        {"@drawable/diarrhea", "Question 3 : ", " Ces dernières 24 heures, avez-vous de la diarrhée ?\nAvec au moins 3 selles molles."},
+                        {"@drawable/breathing", "Question 3 : ", " Ces dernières 24 heures, avez-vous noté un manque de souffle inhabituel lorsque vous parlez ou faites un petit effort ?"},
                 };
         data = items;
 
@@ -108,6 +113,7 @@ public class TestActivity extends AppCompatActivity {
 
     private ArrayList<Question> setAllQuestions(){
         ArrayList<Question> list = new ArrayList<>();
+
         list.add(new Question("@drawable/tchow", "Question 1 : ", "Avez-vous une fatigue inhabituelle ces derniers jours ?"));
         list.add(new Question("@drawable/chaleur", "Question 2 : ", "Lorem Ipsum is simply dummy text of the printing and typesetting industry."));
         list.add(new Question("@drawable/covid", "Question 3 : ", "Lorem Ipsum is simply dummy text of the printing and typesetting industry."));

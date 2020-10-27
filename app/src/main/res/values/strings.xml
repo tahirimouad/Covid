@@ -5,6 +5,21 @@
     <string name="example_question">Have you been unusually tired these few days? Y/N</string>
     <string name="text_msg">Appelez le SAMU en composant le 15 (ou contactez le 114 par SMS si vous êtes sourd ou malentendant).</string>
     <string name="text_conseil">Conseil relatif à votre situation</string>
+    <string name="result_msg">Votre situation peut relever d’un COVID 19. Vos symptômes nécessitent une prise en charge rapide.</string>
+    <string name="r_sultats">Résultats</string>
+    <string name="information_icon">information icon</string>
+    <string name="logo_pic">Logo picture</string>
+    <string name="start_the_test">Start the test</string>
+    <string name="skip">Skip</string>
+    <string name="start_test_icon">Start test icon</string>
+    <string name="terms_of_service">Terms of service</string>
+    <string name="term_text">La recommandation affichée peut évoluer suivant les informations en provenance des autorités de santé et des chercheurs. Elle ne constitue pas un avis médical. En cas de doute, demandez conseil à votre médecin ou pharmacien.</string>
+    <string name="accept_and_go">Accept and Go</string>
+    <string name="question_exp">Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?</string>
+    <string name="non">Non</string>
+    <string name="yes">Yes</string>
+    <string name="question_icon">Question icon</string>
+    <string name="question_1">Question 1</string>
 
     <!--Array of Question-->
     <array name="arrayQuestion">

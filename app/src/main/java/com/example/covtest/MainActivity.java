@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     public void start_test(View view){
         Intent intent = new Intent(this, TermActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void skip(View view){

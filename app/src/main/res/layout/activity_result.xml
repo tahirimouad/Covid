@@ -26,7 +26,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="50dp"
+        android:padding="35dp"
         >
 
         <com.google.android.material.card.MaterialCardView
@@ -44,15 +44,16 @@
 
                 <ImageView
                     android:id="@+id/startIcon"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="84dp"
+                    android:layout_height="95dp"
                     android:layout_marginBottom="30dp"
-                    android:src="@drawable/start_icon" />
+                    android:contentDescription="@string/information_icon"
+                    android:src="@drawable/info_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Test Result "
+                    android:text="@string/r_sultats"
                     android:textAlignment="center"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -63,29 +64,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="50dp"
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indu" />
+                    android:textSize="30sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:text="@string/result_msg" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    >
-
-                    <Button
-                        android:id="@+id/btntestSkip"
-                        style="@style/cornerRadios"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:elevation="1dp"
-                        android:text="Try again"
-                        android:textColor="#FFF"
-                        android:textSize="14dp"
-                        app:backgroundTint="@color/colorAccent"
-                        app:icon="@drawable/ic_play"
-                        app:iconGravity="textStart"
-                        app:iconTint="#FFF" />
-                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
