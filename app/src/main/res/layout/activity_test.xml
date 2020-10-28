@@ -90,10 +90,19 @@
                         android:text="@string/question_exp" />
                 </androidx.core.widget.NestedScrollView>
                 <RadioGroup
+                    android:id="@+id/rg_response"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_empty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:visibility="invisible"
+                        />
 
                     <RadioButton
                         android:id="@+id/rb_no"

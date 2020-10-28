@@ -36,8 +36,12 @@ import retrofit2.Response;
 public class TestActivity extends AppCompatActivity {
     int jNo=0;
     private List<Question> questionList;
+    private RadioGroup radioGroup;
     private RadioButton radioButtonYes;
     private RadioButton radioButtonNo;
+    private RadioButton radioButtonReset;
+
+
     public SeekBar seekBar;
     public TextView txt_question;
     public TextView txt_question_details;
@@ -48,6 +52,8 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+
+        radioButtonReset = (RadioButton)findViewById(R.id.rb_empty) ;
 
         String[][] items =
                 {
@@ -92,8 +98,8 @@ public class TestActivity extends AppCompatActivity {
         return false;
     }
     private void setUncheckedRadioButton(){
-        radioButtonNo.setChecked(false);
-        radioButtonYes.setChecked(false);
+        //radioButtonNo.setChecked(false);
+        //radioButtonYes.setChecked(false);
     }
 
     public void next(View view) {
@@ -101,6 +107,7 @@ public class TestActivity extends AppCompatActivity {
             if (validate()){
                 if (radioButtonYes.isChecked()){
                     resultArray[i] = Constants.YES;
+
                 }
                 if (radioButtonNo.isChecked()){
                     resultArray[i] = Constants.NO;
@@ -108,6 +115,7 @@ public class TestActivity extends AppCompatActivity {
                 }
                 //unchecked the both radio button before the next question
                 //setUncheckedRadioButton();
+                radioButtonReset.setChecked(true);
                 i++;
                 loadQuestion();
             }
