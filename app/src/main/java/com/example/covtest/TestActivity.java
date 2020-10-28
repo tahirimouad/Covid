@@ -42,10 +42,8 @@ public class TestActivity extends AppCompatActivity {
     public TextView txt_question;
     public TextView txt_question_details;
     public String[][] data;
-    private int[] resultArray= {0, 1, 0, 1, 1, 0, 1, 0, 0, 1};
+    private int[] resultArray= {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     public int i = 0;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,22 +56,16 @@ public class TestActivity extends AppCompatActivity {
                         {"@drawable/diarrhea", "Question 3 : ", "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?"},
                         {"@drawable/gorge", "Question 4: ", "  Ces derniers jours, avez-vous eu un mal de gorge et/ou des douleurs musculaires et/ou des courbatures inhabituelles et/ou des maux de tête inhabituels ? "},
                         {"@drawable/breathing", "Question 5 : ", " Ces dernières 24 heures, avez-vous noté un manque de souffle inhabituel lorsque vous parlez ou faites un petit effort ?"},
+                        {"@drawable/fatigue", "Question 6 : ", "Avez-vous une fatigue inhabituelle ces derniers jours ?"},
+                        {"@drawable/taux", "Question 7 : ", " Avez-vous une toux ou votre toux habituelle s’est-elle modifiée ces derniers jours ?"},
+                        {"@drawable/diarrhea", "Question 8 : ", "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?"},
+                        {"@drawable/gorge", "Question 9 : ", "  Ces derniers jours, avez-vous eu un mal de gorge et/ou des douleurs musculaires et/ou des courbatures inhabituelles et/ou des maux de tête inhabituels ? "},
+                        {"@drawable/breathing", "Question 10 : ", " Ces dernières 24 heures, avez-vous noté un manque de souffle inhabituel lorsque vous parlez ou faites un petit effort ?"}
                 };
-
-        /*{"@drawable/tchow", "Question 1 : ", "Avez-vous une fatigue inhabituelle ces derniers jours ?"},
-        {"@drawable/chaleur", "Question 2 : ", " Avez-vous une toux ou votre toux habituelle s’est-elle modifiée ces derniers jours ?"},
-        {"@drawable/covid", "Question 3 : ", "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?"},
-        {"@drawable/toux", "Question 4 : ", " Ces derniers jours, avez-vous une toux ou votre toux habituelle s’est-elle modifiée ? "},
-        {"@drawable/fatigue", "Question 5 : ", "  Ces derniers jours, avez-vous une fatigue inhabituelle ? "},
-        {"@drawable/gorge", "Question 3 : ", "  Ces derniers jours, avez-vous eu un mal de gorge et/ou des douleurs musculaires et/ou des courbatures inhabituelles et/ou des maux de tête inhabituels ? "},
-        {"@drawable/diarrhea", "Question 3 : ", " Ces dernières 24 heures, avez-vous de la diarrhée ?\nAvec au moins 3 selles molles."},
-        {"@drawable/breathing", "Question 3 : ", " Ces dernières 24 heures, avez-vous noté un manque de souffle inhabituel lorsque vous parlez ou faites un petit effort ?"},*/
         data = items;
-
 
         questionList = new ArrayList<>();
         questionList = setAllQuestions();
-
         seekBar = findViewById(R.id.seekBar);
         seekBar.setMax(items.length - 1);
         txt_question = findViewById(R.id.txt_question);
@@ -88,6 +80,7 @@ public class TestActivity extends AppCompatActivity {
             i--;
             loadQuestion();
         }
+
     }
 
     /*
@@ -100,7 +93,6 @@ public class TestActivity extends AppCompatActivity {
     }
     public void next(View view) {
         if (i < data.length - 1) {
-
             if (validate()){
                 if (radioButtonYes.isChecked()){
                     resultArray[i] = Constants.YES;
@@ -111,7 +103,6 @@ public class TestActivity extends AppCompatActivity {
                 i++;
                 loadQuestion();
             }
-
         } else {
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -120,6 +111,15 @@ public class TestActivity extends AppCompatActivity {
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
+                            if (radioButtonYes.isChecked()){
+                                resultArray[i] = Constants.YES;
+                            }else if (radioButtonNo.isChecked()){
+                                resultArray[i] = Constants.NO;
+                            }
+                            else{
+                                resultArray[i] = Constants.NO;
+                            }
 
                             final DecimalFormat df = new DecimalFormat("##.###");
 
@@ -131,7 +131,6 @@ public class TestActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<TestResponse> call, Response<TestResponse> response) {
                                     if(response.isSuccessful()){
-                                        Toast.makeText(TestActivity.this,"Result : "+response.body().getResult(),Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(TestActivity.this, ResultActivity.class);
                                         intent.putExtra("result",""+df.format(response.body().getResult()));
                                         startActivity(intent);
@@ -148,51 +147,15 @@ public class TestActivity extends AppCompatActivity {
                                 }
                             });
 
-                            /*ApiService apiService = ApiClient.getInstance().create(ApiService.class);
-                            apiService.setParam(0, 1, 0, 1, 1,
-                                    0, 1, 0, 0, 1,
-                                    new Callback<TestResponse>() {
-                                        @Override
-                                        public void onResponse(@NonNull Call<TestResponse> call,@NonNull retrofit2.Response<TestResponse> response) {
-                                            String prediction = "" + response.body().getResult();
-
-                                            Intent intent = new Intent(TestActivity.this, ResultActivity.class);
-                                            intent.putExtra("result",prediction);
-                                            startActivity(intent);
-                                        }
-
-                                        @Override
-                                        public void onFailure(@NonNull Call<TestResponse> call, @NonNull Throwable t) {
-
-                                        }
-                                    });*/
-
                         }
 
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            ApiService apiService = ApiClient.getInstance().create(ApiService.class);
-                            TestReport testReport = new TestReport(1,0,0,1,0,0,1,1,0,1);
-                            Call<TestResponse> testing = apiService.checkResult(testReport);
-                            testing.enqueue(new Callback<TestResponse>() {
-                                @Override
-                                public void onResponse(Call<TestResponse> call, Response<TestResponse> response) {
-                                    if(response.isSuccessful()){
-                                        Toast.makeText(TestActivity.this,"Result : "+response.body().getResult(),Toast.LENGTH_LONG).show();
-                                    }
-                                    else{
-                                        Toast.makeText(TestActivity.this,"Req not success",Toast.LENGTH_LONG).show();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<TestResponse> call, Throwable t) {
-                                    Toast.makeText(TestActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
-
-                                }
-                            });
+                            String msg =resultArray[0]+"\n"+resultArray[1]+"\n"+resultArray[2]+"\n"+resultArray[3]+"\n"+
+                                    resultArray[4]+"\n"+resultArray[5]+"\n"+resultArray[6]+"\n"+resultArray[7]+"\n"+resultArray[8]+"\n"+resultArray[9];
+                            Toast.makeText(TestActivity.this,msg,Toast.LENGTH_LONG).show();
 
 
                         }
@@ -210,15 +173,29 @@ public class TestActivity extends AppCompatActivity {
         return list;
     }
     public void loadQuestion() {
+        switch (resultArray[i]){
+            case 0:
+                if(radioButtonYes.isActivated()){
+                    radioButtonYes.setChecked(false);
+                }
+                radioButtonNo.setChecked(true);
+                break;
+            case 1:
+                if(radioButtonNo.isActivated()){
+                    radioButtonNo.setChecked(false);
+                }
+                radioButtonYes.setChecked(true);
+                break;
+        }
         String[] item = data[i];
-
         // image
         ImageView q_image = findViewById(R.id.Q_image);
         int imageResource = getResources().getIdentifier(item[0], null, getPackageName());
         Drawable res = getResources().getDrawable(imageResource);
         q_image.setImageDrawable(res);
         // question title
-        txt_question.setText(item[1] + " : " + i);
+        //txt_question.setText(item[1] + " : " + i);
+        txt_question.setText(item[1]);
         // question description
         txt_question_details.setText(item[2]);
 
