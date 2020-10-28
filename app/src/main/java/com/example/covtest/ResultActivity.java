@@ -15,8 +15,12 @@ public class ResultActivity extends AppCompatActivity {
 
         resutText = (TextView) findViewById(R.id.textView4);
         String result = getIntent().getStringExtra("result");
+        String res="0";
+        if(result!=null){
+            res=result;
+        }
         String message = "Hello hero;\n" +
-                "The probability that you are infected by this virus is "+result+" unless the errors in the calculate.\n" +
+                "The probability that you are infected by this virus is "+res+" unless the errors in the calculate.\n" +
                 "Thank you.\n" +
                 "safe your life and stay home";
 

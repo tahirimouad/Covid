@@ -34,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TestActivity extends AppCompatActivity {
-
+    int jNo=0;
     private List<Question> questionList;
     private RadioButton radioButtonYes;
     private RadioButton radioButtonNo;
@@ -99,6 +99,7 @@ public class TestActivity extends AppCompatActivity {
                 }
                 if (radioButtonNo.isChecked()){
                     resultArray[i] = Constants.NO;
+                    jNo++;
                 }
                 i++;
                 loadQuestion();
@@ -116,9 +117,11 @@ public class TestActivity extends AppCompatActivity {
                                 resultArray[i] = Constants.YES;
                             }else if (radioButtonNo.isChecked()){
                                 resultArray[i] = Constants.NO;
+                                jNo++;
                             }
                             else{
                                 resultArray[i] = Constants.NO;
+                                jNo++;
                             }
 
                             final DecimalFormat df = new DecimalFormat("##.###");
@@ -132,7 +135,11 @@ public class TestActivity extends AppCompatActivity {
                                 public void onResponse(Call<TestResponse> call, Response<TestResponse> response) {
                                     if(response.isSuccessful()){
                                         Intent intent = new Intent(TestActivity.this, ResultActivity.class);
-                                        intent.putExtra("result",""+df.format(response.body().getResult()));
+                                        if(jNo!=10) {
+                                            intent.putExtra("result", "" + df.format(response.body().getResult()));
+                                        }else{
+                                            intent.putExtra("result", 0);
+                                        }
                                         startActivity(intent);
                                     }
                                     else{
