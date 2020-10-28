@@ -74,7 +74,7 @@ public class TestActivity extends AppCompatActivity {
         radioButtonNo = findViewById(R.id.rb_no);
         loadQuestion();
     }
-
+//test
     public void preview(View view) {
         if (i > 0) {
             i--;

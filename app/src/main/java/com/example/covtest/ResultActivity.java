@@ -17,7 +17,7 @@ public class ResultActivity extends AppCompatActivity {
         String result = getIntent().getStringExtra("result");
         String res="0";
         if(result!=null){
-            res=result;
+            res=result; // result
         }
         String message = "Hello hero;\n" +
                 "The probability that you are infected by this virus is "+res+" unless the errors in the calculate.\n" +
