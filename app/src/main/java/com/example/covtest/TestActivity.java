@@ -42,7 +42,7 @@ public class TestActivity extends AppCompatActivity {
     public TextView txt_question;
     public TextView txt_question_details;
     public String[][] data;
-    private int[] resultArray= {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    private int[] resultArray = new int[]{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     public int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +91,11 @@ public class TestActivity extends AppCompatActivity {
             return true;
         return false;
     }
+    private void setUncheckedRadioButton(){
+        radioButtonNo.setChecked(false);
+        radioButtonYes.setChecked(false);
+    }
+
     public void next(View view) {
         if (i < data.length - 1) {
             if (validate()){
@@ -100,6 +105,8 @@ public class TestActivity extends AppCompatActivity {
                 if (radioButtonNo.isChecked()){
                     resultArray[i] = Constants.NO;
                 }
+                //unchecked the both radio button before the next question
+                setUncheckedRadioButton();
                 i++;
                 loadQuestion();
             }
