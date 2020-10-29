@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
@@ -22,9 +23,17 @@ public class SplashScreen extends AppCompatActivity {
 
         Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
         Animation bottomAnim = AnimationUtils.loadAnimation(this,R.anim.buttom_animation);
+        Animation rotateAnim = AnimationUtils.loadAnimation(this,R.anim.rotation_animation);
 
-        imageViewLogo.setAnimation(topAnim);
+
+        AnimationSet s = new AnimationSet(false);//false means don't share interpolators
+        //s.addAnimation(topAnim);
+        s.addAnimation(bottomAnim);
+        s.addAnimation(rotateAnim);
+        imageViewLogo.startAnimation(s);
+        /*imageViewLogo.setAnimation(topAnim);
         imageViewLogo.setAnimation(bottomAnim);
+        imageViewLogo.setAnimation(rotateAnim);*/
 
         handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -34,6 +43,6 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },3000);
+        },4000);
     }
 }
