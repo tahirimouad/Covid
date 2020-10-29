@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import com.example.covtest.utils.Constants;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +43,7 @@ public class TestActivity extends AppCompatActivity {
     private RadioButton radioButtonNo;
     private RadioButton radioButtonReset;
 
+    TextToSpeech textToSpeech;
 
     public SeekBar seekBar;
     public TextView txt_question;
@@ -79,6 +82,16 @@ public class TestActivity extends AppCompatActivity {
         radioButtonYes = findViewById(R.id.rb_yes);
         radioButtonNo = findViewById(R.id.rb_no);
         loadQuestion();
+
+
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if(i==TextToSpeech.SUCCESS){
+                    int lang = textToSpeech.setLanguage(Locale.FRANCE);
+                }
+            }
+        });
     }
 //test
     public void preview(View view) {
@@ -222,5 +235,10 @@ public class TestActivity extends AppCompatActivity {
         txt_question_details.setText(item[2]);
 
         seekBar.setProgress(i);
+    }
+
+    public void sepeakQs(View view) {
+        String qs=txt_question_details.getText().toString();
+        int spech=textToSpeech.speak(qs,TextToSpeech.QUEUE_FLUSH,null);
     }
 }
