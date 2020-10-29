@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CovTest</string>
+    <string name="app_name">CoroCheck</string>
     <string name="forward_image_button">forward image button</string>
     <string name="back_image_button">back image button</string>
     <string name="example_question">Have you been unusually tired these few days? Y/N</string>

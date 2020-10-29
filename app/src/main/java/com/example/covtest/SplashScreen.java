@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         ImageView imageViewLogo = findViewById(R.id.imv_logo);
-
+        TextView slogon = (TextView) findViewById(R.id.slogon);
         Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
         Animation bottomAnim = AnimationUtils.loadAnimation(this,R.anim.buttom_animation);
         Animation rotateAnim = AnimationUtils.loadAnimation(this,R.anim.rotation_animation);
@@ -28,9 +29,11 @@ public class SplashScreen extends AppCompatActivity {
 
         AnimationSet s = new AnimationSet(false);//false means don't share interpolators
         //s.addAnimation(topAnim);
-        s.addAnimation(bottomAnim);
+        s.addAnimation(topAnim);
         s.addAnimation(rotateAnim);
         imageViewLogo.startAnimation(s);
+
+        slogon.setAnimation(bottomAnim);
         /*imageViewLogo.setAnimation(topAnim);
         imageViewLogo.setAnimation(bottomAnim);
         imageViewLogo.setAnimation(rotateAnim);*/
