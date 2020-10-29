@@ -106,7 +106,7 @@ public class TestActivity extends AppCompatActivity {
                     resultArray[i] = Constants.NO;
                 }
                 //unchecked the both radio button before the next question
-                setUncheckedRadioButton();
+                //setUncheckedRadioButton();
                 i++;
                 loadQuestion();
             }
