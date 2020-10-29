@@ -34,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TestActivity extends AppCompatActivity {
-
+    int jNo=0;
     private List<Question> questionList;
     private RadioButton radioButtonYes;
     private RadioButton radioButtonNo;
@@ -74,7 +74,7 @@ public class TestActivity extends AppCompatActivity {
         radioButtonNo = findViewById(R.id.rb_no);
         loadQuestion();
     }
-
+//test
     public void preview(View view) {
         if (i > 0) {
             i--;
@@ -104,6 +104,7 @@ public class TestActivity extends AppCompatActivity {
                 }
                 if (radioButtonNo.isChecked()){
                     resultArray[i] = Constants.NO;
+                    jNo++;
                 }
                 //unchecked the both radio button before the next question
                 //setUncheckedRadioButton();
@@ -123,9 +124,11 @@ public class TestActivity extends AppCompatActivity {
                                 resultArray[i] = Constants.YES;
                             }else if (radioButtonNo.isChecked()){
                                 resultArray[i] = Constants.NO;
+                                jNo++;
                             }
                             else{
                                 resultArray[i] = Constants.NO;
+                                jNo++;
                             }
 
                             final DecimalFormat df = new DecimalFormat("##.###");
@@ -139,7 +142,11 @@ public class TestActivity extends AppCompatActivity {
                                 public void onResponse(Call<TestResponse> call, Response<TestResponse> response) {
                                     if(response.isSuccessful()){
                                         Intent intent = new Intent(TestActivity.this, ResultActivity.class);
-                                        intent.putExtra("result",""+df.format(response.body().getResult()));
+                                        if(jNo!=10) {
+                                            intent.putExtra("result", "" + df.format(response.body().getResult()));
+                                        }else{
+                                            intent.putExtra("result", 0);
+                                        }
                                         startActivity(intent);
                                     }
                                     else{

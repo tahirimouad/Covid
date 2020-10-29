@@ -10,7 +10,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface ApiService {
-
+// return and receive
     @FormUrlEncoded
     @POST("api/corona_test")
     void setParam(@Field("Fever") int fever, @Field("Tiredness") int tiredness, @Field("Dry-Cough") int dry_cough, @Field("Difficulty-in-Breathing") int breathing,
