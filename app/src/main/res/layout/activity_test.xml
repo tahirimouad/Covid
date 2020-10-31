@@ -85,7 +85,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_speak"
-                        android:contentDescription="play"
+                        android:contentDescription="@string/play"
                         android:clickable="true"
                         android:onClick="sepeakQs"
                         />

@@ -38,7 +38,6 @@ import retrofit2.Response;
 public class TestActivity extends AppCompatActivity {
     int jNo=0;
     private List<Question> questionList;
-    private RadioGroup radioGroup;
     private RadioButton radioButtonYes;
     private RadioButton radioButtonNo;
     private RadioButton radioButtonReset;

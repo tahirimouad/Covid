@@ -1,0 +1,194 @@
+Index: app/src/main/res/layout/activity_splash_screen.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:gravity=\"center\"\r\n    tools:context=\".SplashScreen\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imv_logo\"\r\n        android:layout_width=\"187dp\"\r\n        android:layout_height=\"191dp\"\r\n        android:layout_centerInParent=\"true\"\r\n        android:contentDescription=\"@string/logo_pic\"\r\n        android:src=\"@drawable/covid19icon\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/slogon\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_alignBottom=\"@+id/imv_logo\"\r\n        android:fontFamily=\"cursive\"\r\n        android:paddingLeft=\"100dp\"\r\n        android:text=\"Safe your life &amp; stay home\"\r\n        android:textAlignment=\"center\"\r\n        android:layout_marginTop=\"25dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:textSize=\"25sp\" />\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_splash_screen.xml	(revision 53d6c8ecd47748297b089a735268b31c5d5eab0f)
++++ app/src/main/res/layout/activity_splash_screen.xml	(date 1603999311346)
+@@ -19,7 +19,6 @@
+         android:id="@+id/slogon"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+-        android:layout_alignBottom="@+id/imv_logo"
+         android:fontFamily="cursive"
+         android:paddingLeft="100dp"
+         android:text="Safe your life &amp; stay home"
+Index: app/src/main/java/com/example/covtest/SplashScreen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.covtest;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.view.animation.Animation;\r\nimport android.view.animation.AnimationSet;\r\nimport android.view.animation.AnimationUtils;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\npublic class SplashScreen extends AppCompatActivity {\r\n\r\n    Handler handler;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_splash_screen);\r\n\r\n        ImageView imageViewLogo = findViewById(R.id.imv_logo);\r\n        TextView slogon = (TextView) findViewById(R.id.slogon);\r\n        Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);\r\n        Animation bottomAnim = AnimationUtils.loadAnimation(this,R.anim.buttom_animation);\r\n        Animation rotateAnim = AnimationUtils.loadAnimation(this,R.anim.rotation_animation);\r\n\r\n\r\n        AnimationSet s = new AnimationSet(false);//false means don't share interpolators\r\n        //s.addAnimation(topAnim);\r\n        s.addAnimation(topAnim);\r\n        s.addAnimation(rotateAnim);\r\n        imageViewLogo.startAnimation(s);\r\n\r\n        slogon.setAnimation(bottomAnim);\r\n        /*imageViewLogo.setAnimation(topAnim);\r\n        imageViewLogo.setAnimation(bottomAnim);\r\n        imageViewLogo.setAnimation(rotateAnim);*/\r\n\r\n        handler = new Handler();\r\n        handler.postDelayed(new Runnable() {\r\n            @Override\r\n            public void run() {\r\n                Intent intent = new Intent(SplashScreen.this,MainActivity.class);\r\n                startActivity(intent);\r\n                finish();\r\n            }\r\n        },4000);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/covtest/SplashScreen.java	(revision 53d6c8ecd47748297b089a735268b31c5d5eab0f)
++++ app/src/main/java/com/example/covtest/SplashScreen.java	(date 1604010657248)
+@@ -21,7 +21,8 @@
+         setContentView(R.layout.activity_splash_screen);
+ 
+         ImageView imageViewLogo = findViewById(R.id.imv_logo);
+-        TextView slogon = (TextView) findViewById(R.id.slogon);
++        TextView slogon =  findViewById(R.id.slogon);
++
+         Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+         Animation bottomAnim = AnimationUtils.loadAnimation(this,R.anim.buttom_animation);
+         Animation rotateAnim = AnimationUtils.loadAnimation(this,R.anim.rotation_animation);
+Index: app/src/main/java/com/example/covtest/TestActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.covtest;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.app.AlertDialog;\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.graphics.drawable.Drawable;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\n\r\nimport android.widget.ImageView;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\nimport android.widget.SeekBar;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.example.covtest.entities.Question;\r\nimport com.example.covtest.entities.TestReport;\r\nimport com.example.covtest.network.ApiClient;\r\nimport com.example.covtest.network.ApiService;\r\nimport com.example.covtest.network.TestResponse;\r\nimport com.example.covtest.utils.Constants;\r\n\r\n\r\nimport java.text.DecimalFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport retrofit2.Call;\r\nimport retrofit2.Callback;\r\nimport retrofit2.Response;\r\n\r\npublic class TestActivity extends AppCompatActivity {\r\n    int jNo=0;\r\n    private List<Question> questionList;\r\n    private RadioGroup radioGroup;\r\n    private RadioButton radioButtonYes;\r\n    private RadioButton radioButtonNo;\r\n    private RadioButton radioButtonReset;\r\n\r\n\r\n    public SeekBar seekBar;\r\n    public TextView txt_question;\r\n    public TextView txt_question_details;\r\n    public String[][] data;\r\n    private int[] resultArray = new int[]{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};\r\n    public int i = 0;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_test);\r\n\r\n        radioButtonReset = (RadioButton)findViewById(R.id.rb_empty) ;\r\n\r\n        String[][] items =\r\n                {\r\n                        {\"@drawable/fatigue\", \"Question 1 : \", \"Avez-vous une fatigue inhabituelle ces derniers jours ?\"},\r\n                        {\"@drawable/taux\", \"Question 2 : \", \" Avez-vous une toux ou votre toux habituelle s’est-elle modifiée ces derniers jours ?\"},\r\n                        {\"@drawable/diarrhea\", \"Question 3 : \", \"Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?\"},\r\n                        {\"@drawable/gorge\", \"Question 4: \", \"  Ces derniers jours, avez-vous eu un mal de gorge et/ou des douleurs musculaires et/ou des courbatures inhabituelles et/ou des maux de tête inhabituels ? \"},\r\n                        {\"@drawable/breathing\", \"Question 5 : \", \" Ces dernières 24 heures, avez-vous noté un manque de souffle inhabituel lorsque vous parlez ou faites un petit effort ?\"},\r\n                        {\"@drawable/fatigue\", \"Question 6 : \", \"Avez-vous une fatigue inhabituelle ces derniers jours ?\"},\r\n                        {\"@drawable/taux\", \"Question 7 : \", \" Avez-vous une toux ou votre toux habituelle s’est-elle modifiée ces derniers jours ?\"},\r\n                        {\"@drawable/diarrhea\", \"Question 8 : \", \"Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?\"},\r\n                        {\"@drawable/gorge\", \"Question 9 : \", \"  Ces derniers jours, avez-vous eu un mal de gorge et/ou des douleurs musculaires et/ou des courbatures inhabituelles et/ou des maux de tête inhabituels ? \"},\r\n                        {\"@drawable/breathing\", \"Question 10 : \", \" Ces dernières 24 heures, avez-vous noté un manque de souffle inhabituel lorsque vous parlez ou faites un petit effort ?\"}\r\n                };\r\n        data = items;\r\n\r\n        questionList = new ArrayList<>();\r\n        questionList = setAllQuestions();\r\n        seekBar = findViewById(R.id.seekBar);\r\n        seekBar.setMax(items.length - 1);\r\n        txt_question = findViewById(R.id.txt_question);\r\n        txt_question_details = findViewById(R.id.txt_question_details);\r\n        radioButtonYes = findViewById(R.id.rb_yes);\r\n        radioButtonNo = findViewById(R.id.rb_no);\r\n        loadQuestion();\r\n    }\r\n//test\r\n    public void preview(View view) {\r\n        if (i > 0) {\r\n            i--;\r\n            loadQuestion();\r\n        }\r\n\r\n    }\r\n\r\n    /*\r\n    * validate function use for checking if the radioButtons are checked\r\n    * */\r\n    private boolean validate(){\r\n        if (radioButtonYes.isChecked() || radioButtonNo.isChecked())\r\n            return true;\r\n        return false;\r\n    }\r\n    private void setUncheckedRadioButton(){\r\n        //radioButtonNo.setChecked(false);\r\n        //radioButtonYes.setChecked(false);\r\n    }\r\n\r\n    public void next(View view) {\r\n        if (i < data.length - 1) {\r\n            if (validate()){\r\n                if (radioButtonYes.isChecked()){\r\n                    resultArray[i] = Constants.YES;\r\n\r\n                }\r\n                if (radioButtonNo.isChecked()){\r\n                    resultArray[i] = Constants.NO;\r\n                    jNo++;\r\n                }\r\n                //unchecked the both radio button before the next question\r\n                //setUncheckedRadioButton();\r\n                radioButtonReset.setChecked(true);\r\n                i++;\r\n                loadQuestion();\r\n            }\r\n        } else {\r\n            new AlertDialog.Builder(this)\r\n                    .setIcon(android.R.drawable.ic_dialog_alert)\r\n                    .setTitle(\"Show Result\").setIcon(R.drawable.start_icon)\r\n                    .setMessage(\"Are you sure you want to show result of your test ?\")\r\n                    .setPositiveButton(\"Yes\", new DialogInterface.OnClickListener() {\r\n                        @Override\r\n                        public void onClick(DialogInterface dialog, int which) {\r\n\r\n                            if (radioButtonYes.isChecked()){\r\n                                resultArray[i] = Constants.YES;\r\n                            }else if (radioButtonNo.isChecked()){\r\n                                resultArray[i] = Constants.NO;\r\n                                jNo++;\r\n                            }\r\n                            else{\r\n                                resultArray[i] = Constants.NO;\r\n                                jNo++;\r\n                            }\r\n\r\n                            final DecimalFormat df = new DecimalFormat(\"##.###\");\r\n\r\n                            ApiService apiService = ApiClient.getInstance().create(ApiService.class);\r\n                            TestReport testReport = new TestReport(resultArray[0],resultArray[1],resultArray[2],resultArray[3],\r\n                                    resultArray[4],resultArray[5],resultArray[6],resultArray[7],resultArray[8],resultArray[9]);\r\n                            Call<TestResponse> testing = apiService.checkResult(testReport);\r\n                            testing.enqueue(new Callback<TestResponse>() {\r\n                                @Override\r\n                                public void onResponse(Call<TestResponse> call, Response<TestResponse> response) {\r\n                                    if(response.isSuccessful()){\r\n                                        Intent intent = new Intent(TestActivity.this, ResultActivity.class);\r\n                                        if(jNo!=10) {\r\n                                            intent.putExtra(\"result\", \"\" + df.format(response.body().getResult()));\r\n                                        }else{\r\n                                            intent.putExtra(\"result\", 0);\r\n                                        }\r\n                                        startActivity(intent);\r\n                                    }\r\n                                    else{\r\n                                        Toast.makeText(TestActivity.this,\"Req not success\",Toast.LENGTH_LONG).show();\r\n                                    }\r\n                                }\r\n\r\n                                @Override\r\n                                public void onFailure(Call<TestResponse> call, Throwable t) {\r\n                                    Toast.makeText(TestActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();\r\n\r\n                                }\r\n                            });\r\n\r\n                        }\r\n\r\n                    })\r\n                    .setNegativeButton(\"No\", new DialogInterface.OnClickListener() {\r\n                        @Override\r\n                        public void onClick(DialogInterface dialogInterface, int i) {\r\n                            String msg =resultArray[0]+\"\\n\"+resultArray[1]+\"\\n\"+resultArray[2]+\"\\n\"+resultArray[3]+\"\\n\"+\r\n                                    resultArray[4]+\"\\n\"+resultArray[5]+\"\\n\"+resultArray[6]+\"\\n\"+resultArray[7]+\"\\n\"+resultArray[8]+\"\\n\"+resultArray[9];\r\n                            Toast.makeText(TestActivity.this,msg,Toast.LENGTH_LONG).show();\r\n\r\n\r\n                        }\r\n                    })\r\n                    .show();\r\n        }\r\n    }\r\n\r\n    private ArrayList<Question> setAllQuestions(){\r\n        ArrayList<Question> list = new ArrayList<>();\r\n\r\n        list.add(new Question(\"@drawable/tchow\", \"Question 1 : \", \"Avez-vous une fatigue inhabituelle ces derniers jours ?\"));\r\n        list.add(new Question(\"@drawable/chaleur\", \"Question 2 : \", \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\"));\r\n        list.add(new Question(\"@drawable/covid\", \"Question 3 : \", \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\"));\r\n        return list;\r\n    }\r\n    public void loadQuestion() {\r\n        switch (resultArray[i]){\r\n            case 0:\r\n                if(radioButtonYes.isActivated()){\r\n                    radioButtonYes.setChecked(false);\r\n                }\r\n                radioButtonNo.setChecked(true);\r\n                break;\r\n            case 1:\r\n                if(radioButtonNo.isActivated()){\r\n                    radioButtonNo.setChecked(false);\r\n                }\r\n                radioButtonYes.setChecked(true);\r\n                break;\r\n        }\r\n        String[] item = data[i];\r\n        // image\r\n        ImageView q_image = findViewById(R.id.Q_image);\r\n        int imageResource = getResources().getIdentifier(item[0], null, getPackageName());\r\n        Drawable res = getResources().getDrawable(imageResource);\r\n        q_image.setImageDrawable(res);\r\n        // question title\r\n        //txt_question.setText(item[1] + \" : \" + i);\r\n        txt_question.setText(item[1]);\r\n        // question description\r\n        txt_question_details.setText(item[2]);\r\n\r\n        seekBar.setProgress(i);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/covtest/TestActivity.java	(revision 53d6c8ecd47748297b089a735268b31c5d5eab0f)
++++ app/src/main/java/com/example/covtest/TestActivity.java	(date 1604010657345)
+@@ -1,6 +1,5 @@
+ package com.example.covtest;
+ 
+-import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+ import android.app.AlertDialog;
+@@ -8,6 +7,7 @@
+ import android.content.Intent;
+ import android.graphics.drawable.Drawable;
+ import android.os.Bundle;
++import android.util.Log;
+ import android.view.View;
+ 
+ import android.widget.ImageView;
+@@ -34,26 +34,25 @@
+ import retrofit2.Response;
+ 
+ public class TestActivity extends AppCompatActivity {
+-    int jNo=0;
++    private int jNo=0;
+     private List<Question> questionList;
+-    private RadioGroup radioGroup;
+     private RadioButton radioButtonYes;
+     private RadioButton radioButtonNo;
+     private RadioButton radioButtonReset;
+ 
+ 
+-    public SeekBar seekBar;
+-    public TextView txt_question;
+-    public TextView txt_question_details;
++    private SeekBar seekBar;
++    private TextView txt_question;
++    private TextView txt_question_details;
+     public String[][] data;
+     private int[] resultArray = new int[]{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+-    public int i = 0;
++    private int i = 0;
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_test);
+ 
+-        radioButtonReset = (RadioButton)findViewById(R.id.rb_empty) ;
++        radioButtonReset = findViewById(R.id.rb_empty) ;
+ 
+         String[][] items =
+                 {
+@@ -93,14 +92,9 @@
+     * validate function use for checking if the radioButtons are checked
+     * */
+     private boolean validate(){
+-        if (radioButtonYes.isChecked() || radioButtonNo.isChecked())
+-            return true;
+-        return false;
++        return radioButtonYes.isChecked() || radioButtonNo.isChecked();
+     }
+-    private void setUncheckedRadioButton(){
+-        //radioButtonNo.setChecked(false);
+-        //radioButtonYes.setChecked(false);
+-    }
++
+ 
+     public void next(View view) {
+         if (i < data.length - 1) {
+@@ -113,8 +107,6 @@
+                     resultArray[i] = Constants.NO;
+                     jNo++;
+                 }
+-                //unchecked the both radio button before the next question
+-                //setUncheckedRadioButton();
+                 radioButtonReset.setChecked(true);
+                 i++;
+                 loadQuestion();
+@@ -161,14 +153,11 @@
+                                         Toast.makeText(TestActivity.this,"Req not success",Toast.LENGTH_LONG).show();
+                                     }
+                                 }
+-
+                                 @Override
+                                 public void onFailure(Call<TestResponse> call, Throwable t) {
+                                     Toast.makeText(TestActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+-
+                                 }
+                             });
+-
+                         }
+ 
+                     })
+@@ -178,8 +167,6 @@
+                             String msg =resultArray[0]+"\n"+resultArray[1]+"\n"+resultArray[2]+"\n"+resultArray[3]+"\n"+
+                                     resultArray[4]+"\n"+resultArray[5]+"\n"+resultArray[6]+"\n"+resultArray[7]+"\n"+resultArray[8]+"\n"+resultArray[9];
+                             Toast.makeText(TestActivity.this,msg,Toast.LENGTH_LONG).show();
+-
+-
+                         }
+                     })
+                     .show();
+@@ -216,7 +203,6 @@
+         Drawable res = getResources().getDrawable(imageResource);
+         q_image.setImageDrawable(res);
+         // question title
+-        //txt_question.setText(item[1] + " : " + i);
+         txt_question.setText(item[1]);
+         // question description
+         txt_question_details.setText(item[2]);
+Index: app/src/main/java/com/example/covtest/ResultActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.covtest;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\npublic class ResultActivity extends AppCompatActivity {\r\n    TextView resutText;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_result);\r\n\r\n        resutText = (TextView) findViewById(R.id.textView4);\r\n        String result = getIntent().getStringExtra(\"result\");\r\n        String res=\"0\";\r\n        if(result!=null){\r\n            res=result; // result\r\n        }\r\n        String message = \"Hello hero;\\n\" +\r\n                \"The probability that you are infected by this virus is \"+res+\" unless the errors in the calculate.\\n\" +\r\n                \"Thank you.\\n\" +\r\n                \"safe your life and stay home\";\r\n\r\n        resutText.setText(message);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/covtest/ResultActivity.java	(revision 53d6c8ecd47748297b089a735268b31c5d5eab0f)
++++ app/src/main/java/com/example/covtest/ResultActivity.java	(date 1604010044105)
+@@ -4,26 +4,25 @@
+ 
+ import android.os.Bundle;
+ import android.widget.TextView;
+-import android.widget.Toast;
+ 
+ public class ResultActivity extends AppCompatActivity {
+-    TextView resutText;
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_result);
+ 
+-        resutText = (TextView) findViewById(R.id.textView4);
++        TextView resultText = findViewById(R.id.textView4);
+         String result = getIntent().getStringExtra("result");
+-        String res="0";
+-        if(result!=null){
+-            res=result; // result
++        String res = "0";
++        if(result != null){
++            res = result;
+         }
+         String message = "Hello hero;\n" +
+                 "The probability that you are infected by this virus is "+res+" unless the errors in the calculate.\n" +
+                 "Thank you.\n" +
+                 "safe your life and stay home";
+ 
+-        resutText.setText(message);
++        resultText.setText(message);
+     }
+ }
+\ No newline at end of file

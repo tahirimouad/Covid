@@ -21,7 +21,8 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         ImageView imageViewLogo = findViewById(R.id.imv_logo);
-        TextView slogon = (TextView) findViewById(R.id.slogon);
+        TextView slogon =  findViewById(R.id.slogon);
+
         Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
         Animation bottomAnim = AnimationUtils.loadAnimation(this,R.anim.buttom_animation);
         Animation rotateAnim = AnimationUtils.loadAnimation(this,R.anim.rotation_animation);

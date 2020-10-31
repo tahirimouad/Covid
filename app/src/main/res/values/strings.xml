@@ -21,6 +21,7 @@
     <string name="question_icon">Question icon</string>
     <string name="question_1">Question 1</string>
     <string name="quit">Quit</string>
+    <string name="play">play</string>
 
     <!--Array of Question-->
     <array name="arrayQuestion">
