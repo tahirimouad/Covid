@@ -9,7 +9,9 @@
     <string name="question_exp">هل أصبت بالإسهال خلال الـ 24 ساعة الماضية (3 براز رخو على الأقل)؟</string>
     <string name="term_text">قد تتغير التوصية المعروضة بناءً على المعلومات الواردة من السلطات الصحية والباحثين. أنها لا تشكل نصيحة طبية. إذا كنت في شك ، اسأل طبيبك أو الصيدلي للحصول على المشورة.</string>
     <string name="terms_of_service">شروط الخدمة</string>
-    <string name="non">نعم</string>
+    <string name="no">نعم</string>
     <string name="yes">لا</string>
+    <string name="dialog_message">هل تريد الخروج من التطبيق؟</string>
+
 
 </resources>

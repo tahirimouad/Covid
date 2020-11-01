@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="terms">
+    <string name="terms" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab cum esse et facere ipsa laborum provident quibusdam quos sunt tenetur.
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet cum modi molestiae quasi.
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.

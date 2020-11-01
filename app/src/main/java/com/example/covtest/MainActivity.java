@@ -25,15 +25,15 @@ public class MainActivity extends AppCompatActivity {
     public void quit(View view){
         new AlertDialog.Builder(this)
                 .setIcon(R.drawable.ic_quit)
-                .setTitle("Quit")
-                .setMessage("Do you quit application")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.quitter)
+                .setMessage(R.string.dialog_message)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                         System.exit(0);
                     }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

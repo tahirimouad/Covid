@@ -1,27 +1,27 @@
 <resources>
     <string name="app_name">CoroCheck</string>
-    <string name="forward_image_button">forward image button</string>
-    <string name="back_image_button">back image button</string>
+    <string name="forward_image_button" translatable="false">forward image button</string>
+    <string name="back_image_button" translatable="false">back image button</string>
     <string name="example_question">Have you been unusually tired these few days? Y/N</string>
     <string name="text_msg">Appelez le SAMU en composant le 15 (ou contactez le 114 par SMS si vous êtes sourd ou malentendant).</string>
     <string name="text_conseil">Conseil relatif à votre situation</string>
     <string name="result_msg">Votre situation peut relever d’un COVID 19. Vos symptômes nécessitent une prise en charge rapide.</string>
     <string name="r_sultats">Résultats</string>
-    <string name="information_icon">information icon</string>
-    <string name="logo_pic">Logo picture</string>
+    <string name="information_icon" translatable="false">information icon</string>
+    <string name="logo_pic" translatable="false">Logo picture</string>
     <string name="commencer_le_test">commencer le test</string>
-    <string name="start_test_icon">Start test icon</string>
+    <string name="start_test_icon" translatable="false">Start test icon</string>
     <string name="terms_of_service">Conditions d\'utilisation</string>
     <string name="term_text">La recommandation affichée peut évoluer suivant les informations en provenance des autorités de santé et des chercheurs. Elle ne constitue pas un avis médical. En cas de doute, demandez conseil à votre médecin ou pharmacien.</string>
     <string name="accept_and_go">Acceptez</string>
     <string name="question_exp">Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?</string>
-    <string name="non">Non</string>
+    <string name="no">Non</string>
     <string name="yes">Oui</string>
     <string name="question_icon">Question icon</string>
     <string name="question_1">Question 1</string>
     <string name="quitter">Quitter</string>
     <string name="play">play</string>
-
+    <string name="dialog_message">Quittez-vous l'application</string>
     <!--Array of Question-->
     <array name="arrayQuestion">
 
