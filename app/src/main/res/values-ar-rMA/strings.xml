@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CoroCheck</string>
+    <string name="r_sultats">النتيجة</string>
+    <string name="commencer_le_test">إبدأ</string>
+    <string name="quitter">إغلاق</string>
+    <string name="result_msg">قد يكون لديك حالة COVID 19. تتطلب أعراضك إدارة فورية.</string>
+    <string name="accept_and_go">إقبل</string>
+    <string name="question_exp">هل أصبت بالإسهال خلال الـ 24 ساعة الماضية (3 براز رخو على الأقل)؟</string>
+    <string name="term_text">قد تتغير التوصية المعروضة بناءً على المعلومات الواردة من السلطات الصحية والباحثين. أنها لا تشكل نصيحة طبية. إذا كنت في شك ، اسأل طبيبك أو الصيدلي للحصول على المشورة.</string>
+    <string name="terms_of_service">شروط الخدمة</string>
+    <string name="non">نعم</string>
+    <string name="yes">لا</string>
+
 </resources>
